@@ -14,12 +14,14 @@ let requiredRange2 = [100, 350];
 let requiredRange3 = [200, null];
 
 const filterCourse = (range) => {
-  if (range[0] === range[1] && range[0] === null) return courses
+  if (range[0] === range[1] && range[0] === null) return courses //  проверка на неограниченый поиск
+  const newRange = typeof range[0] === typeof range[1] && range[1] < range[0] ?
+    [range[1], range[0]] : range  //  конеченое число поиска может быть меньше начального и фильртация будет работать 
   return (courses.filter(item => (
-    range[0] <= item.prices[0] &&
-    1/range[1] <= 1/item.prices[1] &&
+    newRange[0] <= item.prices[0] &&
+    1/newRange[1] <= 1/item.prices[1] &&
     (
-      typeof range[1] !== typeof item.prices[1] ?
+      typeof newRange[1] !== typeof item.prices[1] ?
       item.prices[1] !== null :
       true
     )
