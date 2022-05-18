@@ -14,6 +14,7 @@ let requiredRange2 = [100, 350];
 let requiredRange3 = [200, null];
 
 const filterCourse = (range) => {
+  if (range[0] === range[1] && range[0] === null) return courses
   return (courses.filter(item => (
     range[0] <= item.prices[0] &&
     1/range[1] <= 1/item.prices[1] &&
